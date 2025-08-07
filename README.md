@@ -5,6 +5,8 @@
 - Changed the star dialog popup to an option to return to the castle or not (appearing from the painting as though you collected the star in vanilla).
 - Other minor superficial changes
 
+Note to anyone building this, BETTERCAMERA and NODRAWINGDISTANCE are enabled by default!
+
 # sm64ex
 Fork of [sm64-port/sm64-port](https://github.com/sm64-port/sm64-port) with additional features. 
 
