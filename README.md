@@ -1,3 +1,9 @@
+# Changes
+
+- Re-enabled Better Camera in Bowser stages
+- Changed all stars to keep Mario in the stage with a dialog box popup
+- Changed the star dialog popup to an option to return to the castle or not (appearing from the painting as though you collected the star in vanilla).
+
 # sm64ex
 Fork of [sm64-port/sm64-port](https://github.com/sm64-port/sm64-port) with additional features. 
 
