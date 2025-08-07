@@ -96,7 +96,7 @@ const struct DialogEntry *const seg2_dialog_table[] = {
 #define COURSE_ACTS(id, name, a,b,c,d,e,f,g) \
     act_name_ ## id ## _1, act_name_ ## id ## _2, act_name_ ## id ## _3, \
     act_name_ ## id ## _4, act_name_ ## id ## _5, act_name_ ## id ## _6, \
-    act_name_ ## id ## _7
+    act_name_ ## id ## _7,
 #define EXTRA_TEXT(id, str) extra_text_ ## id,
 
 const u8 *const seg2_act_name_table[] = {
