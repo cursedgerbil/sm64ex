@@ -211,7 +211,7 @@ DEFINE_DIALOG(DIALOG_013, 1, 5, 30, 200, _("\
 A Power Star!\n\
 Your game was saved.\n\
 Would you like to return\n\
-to the castle.\n\
+to the castle?\n\
 //Yes////No"))
 
 DEFINE_DIALOG(DIALOG_014, 1, 4, 30, 200, _("\
