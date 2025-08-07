@@ -651,10 +651,6 @@ void general_star_dance_handler(struct MarioState *m, s32 isInWater) {
             if (isInWater) {
                 m->area->camera->mode = CAMERA_MODE_NEWCAM;
                 m->area->camera->cutscene = 0;
-                gCutsceneTimer = CUTSCENE_STOP;
-                sStatusFlags |= CAM_FLAG_SMOOTH_MOVEMENT;
-                sStatusFlags &= ~CAM_FLAG_BLOCK_SMOOTH_MOVEMENT;
-                update_camera_yaw(m->area->camera);
             }
         }
     }
