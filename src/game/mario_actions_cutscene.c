@@ -624,9 +624,25 @@ void general_star_dance_handler(struct MarioState *m, s32 isInWater) {
                 if ((m->actionArg & 1) == 0) {
                     level_trigger_warp(m, WARP_OP_STAR_EXIT);
                 } else {
+                    if (gCurrLevelNum == LEVEL_CASTLE || gCurrLevelNum == LEVEL_CASTLE_GROUNDS || gCurrLevelNum == LEVEL_CASTLE_COURTYARD) {
+                        dialogID = get_star_collection_dialog(m);
+                        if (dialogID != 0) {
+                            // look up for dialog
+                            set_mario_action(m, ACT_READING_AUTOMATIC_DIALOG, dialogID);
+                        } else {
+                            set_mario_action(m, isInWater ? ACT_WATER_IDLE : ACT_IDLE, 0);
+                            set_fov_function(CAM_FOV_DEFAULT);
+                            if (isInWater) {
+                                m->area->camera->mode = CAMERA_MODE_NEWCAM;
+                                m->area->camera->cutscene = 0;
+                            }
+                        }
+                    }
+                    else {
                     enable_time_stop();
                     create_dialog_box_with_response(DIALOG_013);
                     m->actionState = 1;
+                    }
                 }
                 break;
         }
