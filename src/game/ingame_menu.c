@@ -2275,7 +2275,7 @@ void render_pause_my_score_coins(void) {
         print_generic_string(CRS_NUM_X1, 157, strCourseNum);
 #endif
 
-        actName = segmented_to_virtual(actNameTbl[(gCurrCourseNum - 1) * 6 + gDialogCourseActNum - 1]);
+        actName = segmented_to_virtual(actNameTbl[(gCurrCourseNum - 1) * 7 + gDialogCourseActNum - 1]);
 
         if (starFlags & (1 << (gDialogCourseActNum - 1))) {
             print_generic_string(TXT_STAR_X, 140, textStar);
@@ -2900,7 +2900,7 @@ void render_course_complete_lvl_info_and_hud_str(void) {
         play_star_fanfare_and_flash_hud(2, 0); //! 2 isn't defined, originally for key hud?
         return;
     } else {
-        name = segmented_to_virtual(actNameTbl[COURSE_STAGES_MAX * 6]);
+        name = segmented_to_virtual(actNameTbl[COURSE_STAGES_MAX * 7]);
         print_hud_course_complete_coins(118, 103);
         play_star_fanfare_and_flash_hud(1, 1 << (gLastCompletedStarNum - 1));
     }
