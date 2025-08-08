@@ -468,6 +468,10 @@ void render_hud(void) {
         if (hudDisplayFlags & HUD_DISPLAY_FLAG_LIVES && configHUD) {
             render_hud_mario_lives();
         }
+        
+        if (hudDisplayFlags && configHUD) {
+            render_hud_mario_captimer();
+        }
 
         if (hudDisplayFlags & HUD_DISPLAY_FLAG_COIN_COUNT && configHUD) {
             render_hud_coins();
