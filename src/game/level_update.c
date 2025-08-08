@@ -929,7 +929,7 @@ void update_hud_values(void) {
         gHudDisplay.stars = gMarioState->numStars;
         gHudDisplay.lives = gMarioState->numLives;
         gHudDisplay.keys = gMarioState->numKeys;
-        gHudDisplay.captimer = gMarioState->capTimer / 60;
+        gHudDisplay.capTimer = gMarioState->capTimer / 60;
 
         if (numHealthWedges > gHudDisplay.wedges) {
             play_sound(SOUND_MENU_POWER_METER, gDefaultSoundArgs);
