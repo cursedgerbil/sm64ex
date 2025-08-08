@@ -36,3 +36,7 @@ A full list of changes made from sm64ex:
 ## Cavern of the Metal Cap
 
 - Metal Cap given when entering the stage now lasts significantly longer.
+
+## Tick Tock Clock
+
+- Changed music to [this](https://www.youtube.com/watch?v=KgimCwVGiPc) theme.
