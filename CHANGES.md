@@ -23,3 +23,15 @@ A full list of changes made from sm64ex:
   - Added an 8-coin ring around the blue coin switch in the cavern.
   - Added an 8-coin ring below the Metal Cap box in the cavern. (Slightly moved the box to accommodate for this.)
   - The ! box at the beginning of the stage now holds 10 coins instead of 3.
+
+## Tower of the Wing Cap
+
+- Wing Cap given when entering the stage now lasts significantly longer.
+
+## Vanish Cap Under The Moat
+
+- Vanish Cap given when entering the stage now lasts significantly longer.
+
+## Cavern of the Metal Cap
+
+- Metal Cap given when entering the stage now lasts significantly longer.
