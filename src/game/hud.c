@@ -470,7 +470,7 @@ void render_hud(void) {
         }
         
         if (hudDisplayFlags && configHUD) {
-            render_hud_mario_cap_timer();
+            render_hud_cap_timer();
         }
 
         if (hudDisplayFlags & HUD_DISPLAY_FLAG_COIN_COUNT && configHUD) {
