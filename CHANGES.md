@@ -40,3 +40,12 @@ A full list of changes made from sm64ex:
 ## Tick Tock Clock
 
 - Changed music to [this](https://www.youtube.com/watch?v=KgimCwVGiPc) theme.
+
+# To-Do
+
+- Edit other courses for 100-coin and design improvement
+- Rainbow Ride music
+- Owl music
+- TTC music loop
+- Other improvements
+- Slightly move JRB blue switch
