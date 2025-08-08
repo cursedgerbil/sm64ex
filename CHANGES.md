@@ -11,6 +11,7 @@ A full list of changes made from sm64ex:
 
 # UI
 
+- Added a counter to the top of the screen while a cap powerup is active that shows the number of seconds remaining.
 - Added names for all 100-coin stars.
 - Renamed the Dire Dire Docks star "Through the Jet Stream" to "Rings of the Jet Stream" to avoid confusion, since a star in Jolly Roger Bay shares the same name.
 
