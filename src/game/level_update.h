@@ -97,7 +97,7 @@ struct HudDisplay {
     /*0x08*/ s16 keys;
     /*0x0A*/ s16 flags;
     /*0x0C*/ u16 timer;
-    /*0x0E*/ s16 captimer;
+    /*0x0E*/ s16 capTimer;
 };
 
 extern struct HudDisplay gHudDisplay;
