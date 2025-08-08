@@ -277,7 +277,7 @@ void render_hud_mario_lives(void) {
 /**
  * NEW: Renders the cap timer.
  */
-void render_hud_mario_lives(void) {
+void render_hud_cap_timer(void) {
     if (gHudDisplay.capTimer > 0) {
         print_text(GFX_DIMENSIONS_RECT_FROM_LEFT_EDGE(78), HUD_TOP_Y, "M");
         print_text(GFX_DIMENSIONS_RECT_FROM_LEFT_EDGE(94), HUD_TOP_Y, "*"); // 'X' glyph
