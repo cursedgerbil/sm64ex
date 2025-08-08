@@ -273,6 +273,18 @@ void render_hud_mario_lives(void) {
     print_text_fmt_int(GFX_DIMENSIONS_RECT_FROM_LEFT_EDGE(54), HUD_TOP_Y, "%d", gHudDisplay.lives);
 }
 
+
+/**
+ * NEW: Renders the cap timer.
+ */
+void render_hud_mario_lives(void) {
+    if (gHudDisplay.capTimer > 0) {
+        print_text(GFX_DIMENSIONS_RECT_FROM_LEFT_EDGE(78), HUD_TOP_Y, "M");
+        print_text(GFX_DIMENSIONS_RECT_FROM_LEFT_EDGE(94), HUD_TOP_Y, "*"); // 'X' glyph
+        print_text_fmt_int(GFX_DIMENSIONS_RECT_FROM_LEFT_EDGE(110), HUD_TOP_Y, "%d", gHudDisplay.capTimer);
+    }
+}
+
 /**
  * Renders the amount of coins collected.
  */
