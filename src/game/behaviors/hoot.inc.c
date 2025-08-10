@@ -160,7 +160,6 @@ void hoot_act_ascent(f32 xPrev, f32 zPrev) {
     o->oMoveAnglePitch = 0xCE38;
 
     if (o->oTimer >= 29) {
-        cur_obj_play_sound_1(SOUND_ENV_WIND2);
         o->header.gfx.unk38.animFrame = 1;
     }
 
