@@ -135,9 +135,5 @@ A full list of changes made from sm64ex:
 
 # To-Do
 
-- Edit other courses for 100-coin and design improvement
-- Rainbow Ride music
 - Owl music
-- TTC music loop
 - Other improvements
-- Slightly move JRB blue switch
