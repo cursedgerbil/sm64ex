@@ -36,6 +36,8 @@ const MacroObject rr_seg7_macro_objs[] = {
     MACRO_OBJECT(/*preset*/ macro_bobomb,                      /*yaw*/   0, /*pos*/  3485,  2889, -2057),
     MACRO_OBJECT(/*preset*/ macro_bobomb,                      /*yaw*/   0, /*pos*/  2628,  2893, -2371),
     MACRO_OBJECT(/*preset*/ macro_coin_ring_horizontal,        /*yaw*/   0, /*pos*/  3542,  2923, -2371),
+    MACRO_OBJECT(/*preset*/ macro_coin_ring_horizontal,        /*yaw*/   0, /*pos*/  -7000,  4650, -8101),
+    MACRO_OBJECT(/*preset*/ macro_coin_ring_horizontal,        /*yaw*/   0, /*pos*/  -5800,  4950, -8101),
     MACRO_OBJECT(/*preset*/ macro_coin_line_horizontal,        /*yaw*/   0, /*pos*/ -3342,  3222, -5071),
     MACRO_OBJECT(/*preset*/ macro_coin_line_horizontal,        /*yaw*/   0, /*pos*/ -7771,  4352, -3871),
     MACRO_OBJECT_WITH_BEH_PARAM(/*preset*/ macro_circling_amp,                /*yaw*/   0, /*pos*/ -6571,  4000, -2328, /*behParam*/ 1),
