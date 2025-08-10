@@ -32,7 +32,7 @@ A full list of changes made from sm64ex:
 
 - Added more coins to make the 100-coin star slightly more forgiving. (Raised the maximum coins collectible in the stage from 104 to 135.)
   - Added an 8-coin ring around a pillar in the center of the stage.
-  - Added an 8-coin ring around the blue coin switch in the cavern.
+  - Added an 8-coin ring around the blue coin switch in the cavern. (Slightly moved the switch to accommodate for this.)
   - Added an 8-coin ring below the Metal Cap box in the cavern. (Slightly moved the box to accommodate for this.)
   - The ! box at the beginning of the stage now holds 10 coins instead of 3.
 
