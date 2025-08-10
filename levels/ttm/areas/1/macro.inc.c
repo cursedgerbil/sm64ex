@@ -39,5 +39,9 @@ const MacroObject ttm_seg7_area_1_macro_objs[] = {
     MACRO_OBJECT(/*preset*/ macro_fire_fly_guy,                /*yaw*/   0, /*pos*/  2300, -1384,  3753),
     MACRO_OBJECT(/*preset*/ macro_butterfly_triplet,           /*yaw*/   0, /*pos*/  -606,  1186, -1290),
     MACRO_OBJECT(/*preset*/ macro_jumping_box,                 /*yaw*/   0, /*pos*/  4980, -4607,  2680),
+    MACRO_OBJECT(/*preset*/ macro_coin_ring_horizontal,        /*yaw*/   0, /*pos*/  1992, -1548,  2944),
+    MACRO_OBJECT(/*preset*/ macro_coin_ring_horizontal,          /*yaw*/ 0, /*pos*/ -2676, -2145,  2923),
+    MACRO_OBJECT(/*preset*/ macro_coin_ring_horizontal,      /*yaw*/   0, /*pos*/  -600,  1177, -1340),
+    MACRO_OBJECT(/*preset*/ macro_box_ten_coins,                 /*yaw*/ 0, /*pos*/  2229, 2207,  -1135),
     MACRO_OBJECT_END(),
 };
