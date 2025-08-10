@@ -196,6 +196,7 @@ void hoot_action_loop(void) {
             }
 
             hoot_carry_step(20, xPrev, zPrev);
+            play_secondary_music(SEQ_EVENT_OWL, 0, 255, 1000);
             break;
 
         case HOOT_ACT_TIRED:
