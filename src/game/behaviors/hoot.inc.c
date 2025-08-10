@@ -1,4 +1,5 @@
 // hoot.c.inc
+#include "seq_ids.h"
 
 void bhv_hoot_init(void) {
     cur_obj_init_animation(0);
