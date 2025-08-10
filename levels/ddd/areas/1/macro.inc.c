@@ -11,6 +11,8 @@ const MacroObject ddd_seg7_area_1_macro_objs[] = {
     MACRO_OBJECT(/*preset*/ macro_coin_line_vertical,   /*yaw*/   0, /*pos*/ -3760, -4560,   660),
     MACRO_OBJECT(/*preset*/ macro_coin_line_vertical,   /*yaw*/   0, /*pos*/ -4240, -4786,  1180),
     MACRO_OBJECT(/*preset*/ macro_coin_line_horizontal, /*yaw*/ 315, /*pos*/ -4840, -1137,  1860),
+    MACRO_OBJECT(/*preset*/ macro_coin_ring_horizontal_flying, /*yaw*/   0, /*pos*/ -3071,  -270,     0),
+    MACRO_OBJECT(/*preset*/ macro_coin_ring_horizontal_flying, /*yaw*/   0, /*pos*/ -3071, -3000,     0),
     MACRO_OBJECT(/*preset*/ macro_yellow_coin_2,        /*yaw*/   0, /*pos*/ -2180, -5119,  1720),
     MACRO_OBJECT(/*preset*/ macro_yellow_coin_2,        /*yaw*/   0, /*pos*/ -1460, -5119,  1300),
     MACRO_OBJECT(/*preset*/ macro_yellow_coin_2,        /*yaw*/   0, /*pos*/ -1320, -5119,   840),
@@ -18,5 +20,6 @@ const MacroObject ddd_seg7_area_1_macro_objs[] = {
     MACRO_OBJECT(/*preset*/ macro_fish_group,           /*yaw*/   0, /*pos*/ -2020, -3460,  -120),
     MACRO_OBJECT(/*preset*/ macro_coin_ring_vertical,   /*yaw*/  90, /*pos*/     0, -4250,     0),
     MACRO_OBJECT(/*preset*/ macro_coin_ring_vertical,   /*yaw*/  90, /*pos*/ -2000, -4250,     0),
+    MACRO_OBJECT(/*preset*/ macro_coin_ring_vertical,   /*yaw*/  90, /*pos*/  1000, -4250,     0),
     MACRO_OBJECT_END(),
 };
