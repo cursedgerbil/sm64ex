@@ -27,7 +27,7 @@ A full list of changes made from sm64ex:
 ## Whomp's Fortress
 
 - Bob-omb Buddy and Hoot The Owl now spawn from Star 2 onwards instead of Star 3 onwards.
-- Hoot The Owl now plays the [Owl music](https://www.youtube.com/watch?v=TrqlcurjHPE) from SM64 while flying.
+- Hoot The Owl now plays the [Owl music](https://www.youtube.com/watch?v=TrqlcurjHPE) from SM64DS while flying.
 
 ## Jolly Roger Bay
 
