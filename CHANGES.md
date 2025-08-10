@@ -117,6 +117,7 @@ A full list of changes made from sm64ex:
 ## Rainbow Ride
 
 - Changed music to [this](https://www.youtube.com/watch?v=NAuIdiKDwY0) theme.
+- Removed strong winds.
 - Added a series of rotating platforms to enable skipping all magic carpets across the course with some skill. (God they're slow and dull.)
   - Moved the 1-UP on the way to the big house to fit the new layout.
 - Added more coins to make the 100-coin star slightly more forgiving. (Raised the maximum coins collectible in the stage from 146 to 162.)
