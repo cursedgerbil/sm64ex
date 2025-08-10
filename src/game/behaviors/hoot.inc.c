@@ -168,6 +168,7 @@ void hoot_act_ascent(f32 xPrev, f32 zPrev) {
         o->oAction = HOOT_ACT_CARRY;
 
     hoot_carry_step(60, xPrev, zPrev);
+    play_secondary_music(SEQ_EVENT_OWL, 0, 255, 1000);
 }
 
 void hoot_action_loop(void) {
