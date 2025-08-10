@@ -107,7 +107,7 @@ void hoot_carry_step(s32 speed, UNUSED f32 xPrev, UNUSED f32 zPrev) {
     o->oPosY -= o->oVelY + coss((s32)(sp22 * 6553.6)) * 50.0f / 4;
     o->oPosZ += o->oVelZ;
 
-    play_secondary_music(SEQ_EVENT_PIRANHA_PLANT, 0, 255, 1000);
+    play_secondary_music(SEQ_EVENT_OWL, 0, 255, 1000);
     
     if (sp22 == 0)
         cur_obj_play_sound_2(SOUND_GENERAL_SWISH_WATER);
