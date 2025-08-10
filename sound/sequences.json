@@ -36,5 +36,6 @@
     "21_menu_file_select": ["24"],
     "22_cutscene_lakitu": {"ifdef": ["VERSION_US", "VERSION_EU"], "banks": ["1B"]},
     "23_ticktock": ["26_ticktock"],
-    "24_rainbow": ["27_rainbow"]
+    "24_rainbow": ["27_rainbow"],
+    "25_owl": ["28_owl"]
 }
