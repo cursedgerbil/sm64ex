@@ -59,8 +59,6 @@ const MacroObject thi_seg7_area_2_macro_objs[] = {
     MACRO_OBJECT(/*preset*/ macro_hidden_star_trigger,         /*yaw*/   0, /*pos*/ -1330,  -900,  1945),
     MACRO_OBJECT(/*preset*/ macro_hidden_star_trigger,         /*yaw*/   0, /*pos*/     0,  1150,  -450),
     MACRO_OBJECT(/*preset*/ macro_hidden_star_trigger,         /*yaw*/   0, /*pos*/ -1392,    92,  -633),
-    MACRO_OBJECT(/*preset*/ macro_fire_spitter,                /*yaw*/   0, /*pos*/  1348,  -148,   666),
-    MACRO_OBJECT(/*preset*/ macro_fire_spitter,                /*yaw*/   0, /*pos*/  1733,  -770,  1718),
     MACRO_OBJECT(/*preset*/ macro_fire_spitter,                /*yaw*/   0, /*pos*/ -2133,  -770,   296),
     MACRO_OBJECT(/*preset*/ macro_fire_spitter,                /*yaw*/   0, /*pos*/  -160,  -608,   666),
     MACRO_OBJECT(/*preset*/ macro_butterfly_triplet,           /*yaw*/   0, /*pos*/ -1693,  -890,  1746),
