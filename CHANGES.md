@@ -136,5 +136,4 @@ A full list of changes made from sm64ex:
 
 # To-Do
 
-- Owl music
 - Other improvements
