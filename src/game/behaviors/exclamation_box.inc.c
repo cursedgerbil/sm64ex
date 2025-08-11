@@ -1,5 +1,7 @@
 // exclamation_box.c.inc
 
+#include "../../sm64ap.h"
+
 struct ObjectHitbox sExclamationBoxHitbox = {
     /* interactType: */ INTERACT_BREAKABLE,
     /* downOffset: */ 5,
@@ -36,10 +38,14 @@ void bhv_rotating_exclamation_box_loop(void) {
 }
 
 void exclamation_box_act_0(void) {
+    if ((o->oBehParams >> 16) == 0x1404) {
+        o->oAnimState = 3;
+        o->oAction = 2;
+        return;
+    }
     if (o->oBehParams2ndByte < 3) {
         o->oAnimState = o->oBehParams2ndByte;
-        if ((save_file_get_flags() & D_8032F0C0[o->oBehParams2ndByte])
-            || ((o->oBehParams >> 24) & 0xFF) != 0)
+        if ((o->oBehParams >> 16) == 0x1404 || SM64AP_HaveCap(D_8032F0C0[o->oBehParams2ndByte]))
             o->oAction = 2;
         else
             o->oAction = 1;
@@ -55,8 +61,7 @@ void exclamation_box_act_1(void) {
         spawn_object(o, MODEL_EXCLAMATION_POINT, bhvRotatingExclamationMark);
         cur_obj_set_model(MODEL_EXCLAMATION_BOX_OUTLINE);
     }
-    if ((save_file_get_flags() & D_8032F0C0[o->oBehParams2ndByte])
-        || ((o->oBehParams >> 24) & 0xFF) != 0) {
+    if ((o->oBehParams >> 16) == 0x1404 || SM64AP_HaveCap(D_8032F0C0[o->oBehParams2ndByte])) {
         o->oAction = 2;
         cur_obj_set_model(MODEL_EXCLAMATION_BOX);
     }
@@ -102,6 +107,12 @@ void exclamation_box_act_3(void) {
 }
 
 void exclamation_box_spawn_contents(struct Struct802C0DF0 *a0, u8 a1) {
+    if ((o->oBehParams >> 16) == 0x1404) {
+        SM64AP_SendByBoxID(o->oBehParams & 0xFFFF);
+        return;
+    }
+
+
     struct Object *sp1C = NULL;
 
     while (a0->unk0 != 99) {
