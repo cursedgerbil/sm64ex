@@ -1,6 +1,7 @@
 #include <ultra64.h>
 #include <stdbool.h>
 
+#include "sm64ap.h"
 #include "sm64.h"
 #include "seq_ids.h"
 #include "dialog_ids.h"
@@ -249,15 +250,15 @@ void load_level_init_text(u32 arg) {
 
     switch (dialogID) {
         case DIALOG_129:
-            gotAchievement = save_file_get_flags() & SAVE_FLAG_HAVE_VANISH_CAP;
+            gotAchievement = SM64AP_CheckedLoc(SM64AP_ID_VANISHCAP);
             break;
 
         case DIALOG_130:
-            gotAchievement = save_file_get_flags() & SAVE_FLAG_HAVE_METAL_CAP;
+            gotAchievement = SM64AP_CheckedLoc(SM64AP_ID_METALCAP);
             break;
 
         case DIALOG_131:
-            gotAchievement = save_file_get_flags() & SAVE_FLAG_HAVE_WING_CAP;
+            gotAchievement = SM64AP_CheckedLoc(SM64AP_ID_WINGCAP);
             break;
 
         case 255:
@@ -533,7 +534,7 @@ void check_instant_warp(void) {
     struct Surface *floor;
 
     if (gCurrLevelNum == LEVEL_CASTLE
-        && save_file_get_total_star_count(gCurrSaveFileNum - 1, COURSE_MIN - 1, COURSE_MAX - 1) >= 70) {
+        && save_file_get_total_star_count(gCurrSaveFileNum - 1, COURSE_MIN - 1, COURSE_MAX - 1) >= SM64AP_GetRequiredStars(70)) {
         return;
     }
 
@@ -614,6 +615,7 @@ s16 music_changed_through_warp(s16 arg) {
  * Set the current warp type and destination level/area/node.
  */
 void initiate_warp(s16 destLevel, s16 destArea, s16 destWarpNode, s32 arg3) {
+    SM64AP_RedirectWarp(&gCurrLevelNum, &destLevel, &(gCurrentArea->index), &destArea, &destWarpNode, sSourceWarpNodeId == WARP_NODE_DEATH, sDelayedWarpOp);
     if (destWarpNode >= WARP_NODE_CREDITS_MIN) {
         sWarpDest.type = WARP_TYPE_CHANGE_LEVEL;
     } else if (destLevel != gCurrLevelNum) {
@@ -752,6 +754,7 @@ s16 level_trigger_warp(struct MarioState *m, s32 warpOp) {
                 break;
 
             case WARP_OP_UNKNOWN_01: // enter totwc
+                SM64AP_SetClockToTTCState();
                 sDelayedWarpTimer = 30;
                 sSourceWarpNodeId = WARP_NODE_F2;
                 play_transition(WARP_TRANSITION_FADE_INTO_COLOR, 0x1E, 0xFF, 0xFF, 0xFF);
@@ -781,7 +784,8 @@ s16 level_trigger_warp(struct MarioState *m, s32 warpOp) {
                 play_transition(WARP_TRANSITION_FADE_INTO_CIRCLE, 0x14, 0x00, 0x00, 0x00);
                 break;
 
-            case WARP_OP_WARP_OBJECT:
+            case WARP_OP_WARP_OBJECT: // Secret star entrance
+                SM64AP_SetClockToTTCState();
                 sDelayedWarpTimer = 20;
                 sSourceWarpNodeId = (m->usedObj->oBehParams & 0x00FF0000) >> 16;
                 val04 = !music_changed_through_warp(sSourceWarpNodeId);
@@ -926,7 +930,8 @@ void update_hud_values(void) {
         }
 #endif
 
-        gHudDisplay.stars = gMarioState->numStars;
+        gHudDisplay.stars = SM64AP_GetStars();
+        SM64AP_PrintNext();
         gHudDisplay.lives = gMarioState->numLives;
         gHudDisplay.keys = gMarioState->numKeys;
         gHudDisplay.capTimer = gMarioState->capTimer / 30;
@@ -935,6 +940,10 @@ void update_hud_values(void) {
             play_sound(SOUND_MENU_POWER_METER, gDefaultSoundArgs);
         }
         gHudDisplay.wedges = numHealthWedges;
+      
+        if (SM64AP_DeathLinkPending()) {
+            gMarioState->health = 0xFF;
+        }
 
         if (gMarioState->hurtCounter > 0) {
             gHudDisplay.flags |= HUD_DISPLAY_FLAG_EMPHASIZE_POWER;
