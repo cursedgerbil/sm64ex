@@ -1,3 +1,6 @@
+This branch of the repo is for the Archipelago version, combining the Archipelago SM64EX version by N00byKing [here](https://github.com/N00byKing/sm64ex/tree/archipelago) and my personal fork.
+Install using the SM64-APLauncher.
+
 # Changes
 
 - Re-enabled Better Camera in Bowser stages
