@@ -1,5 +1,7 @@
 #include <ultra64.h>
 
+#include "sm64ap.h"
+
 #include "sm64.h"
 #include "engine/math_util.h"
 #include "engine/surface_collision.h"
@@ -350,6 +352,12 @@ u32 check_ledge_grab(struct MarioState *m, struct Surface *wall, Vec3f intendedP
     Vec3f ledgePos;
     f32 displacementX;
     f32 displacementZ;
+    
+    if (!SM64AP_CanLedgeGrab()) {
+        return 0;
+    }
+
+
 
     if (m->vel[1] > 0) {
         return 0;
