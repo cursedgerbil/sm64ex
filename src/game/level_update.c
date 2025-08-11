@@ -942,7 +942,7 @@ void update_hud_values(void) {
         gHudDisplay.wedges = numHealthWedges;
       
         if (SM64AP_DeathLinkPending()) {
-            if (!(m->flags & MARIO_METAL_CAP)) {
+            if (!(gMarioState->flags & MARIO_METAL_CAP)) {
                 gMarioState->health = 0xFF;
             }
         }
