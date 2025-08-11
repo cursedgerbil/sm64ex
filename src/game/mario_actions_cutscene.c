@@ -1,5 +1,7 @@
 #include <PR/ultratypes.h>
 
+#include "sm64ap.h"
+
 #include "prevent_bss_reordering.h"
 #include "sm64.h"
 #include "area.h"
@@ -1202,6 +1204,7 @@ s32 act_death_exit(struct MarioState *m) {
 #endif
         queue_rumble_data(5, 80);
         m->numLives--;
+        SM64AP_DeathLinkSend();
         // restore 7.75 units of health
         m->healCounter = 31;
     }
@@ -1218,6 +1221,7 @@ s32 act_unused_death_exit(struct MarioState *m) {
         play_sound(SOUND_MARIO_OOOF2, m->marioObj->header.gfx.cameraToObject);
 #endif
         m->numLives--;
+        SM64AP_DeathLinkSend();
         // restore 7.75 units of health
         m->healCounter = 31;
     }
@@ -1235,6 +1239,7 @@ s32 act_falling_death_exit(struct MarioState *m) {
 #endif
         queue_rumble_data(5, 80);
         m->numLives--;
+        SM64AP_DeathLinkSend();
         // restore 7.75 units of health
         m->healCounter = 31;
     }
@@ -1280,6 +1285,7 @@ s32 act_special_death_exit(struct MarioState *m) {
     if (launch_mario_until_land(m, ACT_HARD_BACKWARD_GROUND_KB, MARIO_ANIM_BACKWARD_AIR_KB, -24.0f)) {
         queue_rumble_data(5, 80);
         m->numLives--;
+        SM64AP_DeathLinkSend();
         m->healCounter = 31;
     }
     // show Mario
