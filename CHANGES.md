@@ -135,6 +135,10 @@ A full list of changes made from sm64ex:
 
 - Metal Cap given when entering the stage now lasts significantly longer.
 
+# Archipelago-Specific Changes
+
+- Secret star count reverted to work like in vanilla
+
 # To-Do
 
 - Other improvements
