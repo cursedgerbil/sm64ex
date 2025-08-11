@@ -21,6 +21,7 @@
 #include "save_file.h"
 #include "seq_ids.h"
 #include "sm64.h"
+#include "../sm64ap.h"
 #include "sound_init.h"
 #include "thread6.h"
 
@@ -837,6 +838,8 @@ u32 interact_bbh_entrance(struct MarioState *m, UNUSED u32 interactType, struct 
         o->oInteractStatus = INT_STATUS_INTERACTED;
         m->interactObj = o;
         m->usedObj = o;
+		
+        SM64AP_SetClockToTTCState();
 
         if (m->action & ACT_FLAG_AIR) {
             return set_mario_action(m, ACT_BBH_ENTER_SPIN, 0);
@@ -896,33 +899,37 @@ u32 interact_warp_door(struct MarioState *m, UNUSED u32 interactType, struct Obj
     u32 actionArg;
 
     if (m->action == ACT_WALKING || m->action == ACT_DECELERATING) {
-        if (warpDoorId == 1 && !(saveFlags & SAVE_FLAG_UNLOCKED_UPSTAIRS_DOOR)) {
-            if (!(saveFlags & SAVE_FLAG_HAVE_KEY_2)) {
+        if (warpDoorId == 1) {
+            if (!SM64AP_HaveKey2()) {
                 if (!sDisplayingDoorText) {
                     set_mario_action(m, ACT_READING_AUTOMATIC_DIALOG,
-                                     (saveFlags & SAVE_FLAG_HAVE_KEY_1) ? DIALOG_023 : DIALOG_022);
+                                     SM64AP_HaveKey1() ? DIALOG_023 : DIALOG_022);
                 }
                 sDisplayingDoorText = TRUE;
 
                 return FALSE;
             }
 
-            doorAction = ACT_UNLOCKING_KEY_DOOR;
+            if (!(saveFlags & SAVE_FLAG_UNLOCKED_UPSTAIRS_DOOR)) {
+                doorAction = ACT_UNLOCKING_KEY_DOOR;
+            }
         }
 
-        if (warpDoorId == 2 && !(saveFlags & SAVE_FLAG_UNLOCKED_BASEMENT_DOOR)) {
-            if (!(saveFlags & SAVE_FLAG_HAVE_KEY_1)) {
+        if (warpDoorId == 2) {
+            if (!SM64AP_HaveKey1()) {
                 if (!sDisplayingDoorText) {
                     // Moat door skip was intended confirmed
                     set_mario_action(m, ACT_READING_AUTOMATIC_DIALOG,
-                                     (saveFlags & SAVE_FLAG_HAVE_KEY_2) ? DIALOG_023 : DIALOG_022);
+                                     SM64AP_HaveKey2() ? DIALOG_099 : DIALOG_022);
                 }
                 sDisplayingDoorText = TRUE;
 
                 return FALSE;
             }
 
-            doorAction = ACT_UNLOCKING_KEY_DOOR;
+            if (!(saveFlags & SAVE_FLAG_UNLOCKED_BASEMENT_DOOR)) {
+                doorAction = ACT_UNLOCKING_KEY_DOOR;
+            }
         }
 
         if (m->action == ACT_WALKING || m->action == ACT_DECELERATING) {
@@ -947,12 +954,13 @@ u32 interact_warp_door(struct MarioState *m, UNUSED u32 interactType, struct Obj
 
 u32 get_door_save_file_flag(struct Object *door) {
     u32 saveFileFlag = 0;
-    s16 requiredNumStars = door->oBehParams >> 24;
+    s16 orignumstars = o->oBehParams >> 24;
+    s16 requiredNumStars = SM64AP_GetRequiredStars(orignumstars);
 
     s16 isCcmDoor = door->oPosX < 0.0f;
     s16 isPssDoor = door->oPosY > 500.0f;
 
-    switch (requiredNumStars) {
+    switch (orignumstars) {
         case 1:
             if (isPssDoor) {
                 saveFileFlag = SAVE_FLAG_UNLOCKED_PSS_DOOR;
@@ -1038,12 +1046,12 @@ u32 interact_door(struct MarioState *m, UNUSED u32 interactType, struct Object *
                     break;
             }
 
-            text += requiredNumStars - numStars;
+            text += requiredNumStars;
 
             sDisplayingDoorText = TRUE;
             return set_mario_action(m, ACT_READING_AUTOMATIC_DIALOG, text);
         }
-    } else if (m->action == ACT_IDLE && sDisplayingDoorText == TRUE && requiredNumStars == 70) {
+    } else if (m->action == ACT_IDLE && sDisplayingDoorText == TRUE && orignumstars == 70) {
         m->interactObj = o;
         m->usedObj = o;
         return set_mario_action(m, ACT_ENTERING_STAR_DOOR, should_push_or_pull_door(m, o));
@@ -1478,7 +1486,7 @@ u32 check_object_grab_mario(struct MarioState *m, UNUSED u32 interactType, struc
 
 u32 interact_pole(struct MarioState *m, UNUSED u32 interactType, struct Object *o) {
     s32 actionId = m->action & ACT_ID_MASK;
-    if (actionId >= 0x080 && actionId < 0x0A0) {
+    if (actionId >= 0x080 && actionId < 0x0A0 && SM64AP_CanClimb()) {
         if (!(m->prevAction & ACT_FLAG_ON_POLE) || m->usedObj != o) {
 #ifdef VERSION_SH
             f32 velConv = m->forwardVel; // conserve the velocity.
