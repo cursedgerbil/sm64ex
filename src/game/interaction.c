@@ -1,5 +1,6 @@
 #include <PR/ultratypes.h>
 
+#include "../sm64ap.h"
 #include "area.h"
 #include "actors/common1.h"
 #include "audio/external.h"
@@ -21,7 +22,6 @@
 #include "save_file.h"
 #include "seq_ids.h"
 #include "sm64.h"
-#include "../sm64ap.h"
 #include "sound_init.h"
 #include "thread6.h"
 
@@ -765,9 +765,11 @@ u32 interact_star_or_key(struct MarioState *m, UNUSED u32 interactType, struct O
     u32 starIndex;
     u32 starGrabAction = ACT_STAR_DANCE_EXIT;
     u32 noExit = (o->oInteractionSubtype & INT_SUBTYPE_NO_EXIT) != 0;
+	
     if (!(gCurrLevelNum == LEVEL_BOWSER_1 || gCurrLevelNum == LEVEL_BOWSER_2 || gCurrLevelNum == LEVEL_BOWSER_3)) {
 	noExit = TRUE;
     }
+	
     u32 grandStar = (o->oInteractionSubtype & INT_SUBTYPE_GRAND_STAR) != 0;
 
     if (m->health >= 0x100) {
@@ -838,7 +840,7 @@ u32 interact_bbh_entrance(struct MarioState *m, UNUSED u32 interactType, struct 
         o->oInteractStatus = INT_STATUS_INTERACTED;
         m->interactObj = o;
         m->usedObj = o;
-		
+
         SM64AP_SetClockToTTCState();
 
         if (m->action & ACT_FLAG_AIR) {
@@ -954,13 +956,12 @@ u32 interact_warp_door(struct MarioState *m, UNUSED u32 interactType, struct Obj
 
 u32 get_door_save_file_flag(struct Object *door) {
     u32 saveFileFlag = 0;
-    s16 orignumstars = o->oBehParams >> 24;
-    s16 requiredNumStars = SM64AP_GetRequiredStars(orignumstars);
+    s16 requiredNumStars = door->oBehParams >> 24;
 
     s16 isCcmDoor = door->oPosX < 0.0f;
     s16 isPssDoor = door->oPosY > 500.0f;
 
-    switch (orignumstars) {
+    switch (requiredNumStars) {
         case 1:
             if (isPssDoor) {
                 saveFileFlag = SAVE_FLAG_UNLOCKED_PSS_DOOR;
@@ -994,7 +995,8 @@ u32 get_door_save_file_flag(struct Object *door) {
 }
 
 u32 interact_door(struct MarioState *m, UNUSED u32 interactType, struct Object *o) {
-    s16 requiredNumStars = o->oBehParams >> 24;
+    s16 orignumstars = o->oBehParams >> 24;
+    s16 requiredNumStars = SM64AP_GetRequiredStars(orignumstars);
     s16 numStars = save_file_get_total_star_count(gCurrSaveFileNum - 1, COURSE_MIN - 1, COURSE_MAX - 1);
 
     if (m->action == ACT_WALKING || m->action == ACT_DECELERATING) {
@@ -1025,7 +1027,7 @@ u32 interact_door(struct MarioState *m, UNUSED u32 interactType, struct Object *
         } else if (!sDisplayingDoorText) {
             u32 text = DIALOG_022 << 16;
 
-            switch (requiredNumStars) {
+            switch (orignumstars) {
                 case 1:
                     text = DIALOG_024 << 16;
                     break;
