@@ -8,6 +8,7 @@ A full list of changes made from sm64ex:
 
 - Enabled Better Camera in all Bowser stages
 - All stars in the game, excluding stars in the castle and Bowser keys, now prompt a dialog box when picked up that allows the player to either remain in the level or exit via the painting as they normally would when collecting a star. This replaces the save dialog box for 100-coin and secret stars.
+- Metal Mario is now immune to fall damage
 
 # UI
 
