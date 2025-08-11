@@ -1,6 +1,5 @@
 #include <ultra64.h>
 
-
 #include "sm64ap.h"
 #include "hud.h"
 
@@ -1124,7 +1123,6 @@ void render_star_count_dialog_text(s8 *xMatrix, s16 *linePos)
         render_digit(xMatrix, linePos, tensDigit);
 #endif
     }
-#endif
 
 #ifdef VERSION_EU
     render_digit(dialog, linePos, onesDigit);
@@ -1139,7 +1137,6 @@ void render_digit(struct DialogEntry *dialog, s8 *linePos, int i)
 void render_digit(s8 *xMatrix, s16 *linePos, int i)
 #endif
 {
-
 #if defined(VERSION_JP) || defined(VERSION_SH)
     create_dl_translation_matrix(MENU_MTX_NOPUSH, xMatrix[0] * 10, 0, 0);
     render_generic_char(i);
@@ -1152,7 +1149,6 @@ void render_digit(s8 *xMatrix, s16 *linePos, int i)
         create_dl_translation_matrix(MENU_MTX_NOPUSH,
                                      (f32) (gDialogCharWidths[DIALOG_CHAR_SPACE] * xMatrix[0]), 0, 0);
     }
-
     render_generic_char(i);
     create_dl_translation_matrix(MENU_MTX_NOPUSH, (f32) gDialogCharWidths[i], 0, 0);
     xMatrix[0] = 1;
@@ -2467,6 +2463,7 @@ void print_hud_pause_colorful_str(void) {
                          SCREEN_WIDTH / 2, textPause, 12.0f), 81, textPause);
 #else
     print_hud_lut_string(HUD_LUT_GLOBAL, 123, 81, textPause);
+
 #endif
 
     gSPDisplayList(gDisplayListHead++, dl_rgba16_text_end);
@@ -2587,6 +2584,7 @@ void render_pause_castle_main_strings(s16 x, s16 y) {
             u8 str_cannon[] = { TEXT_CANYON };
             print_generic_string(x + 50, y - 5, str_cannon);
         }
+
 #ifdef VERSION_EU
         print_generic_string(x - 17, y + 30, courseName);
 #endif
@@ -2707,7 +2705,7 @@ s16 render_pause_courses_and_castle(void) {
     optmenu_draw_prompt();
 #endif
 
-        print_text(GFX_DIMENSIONS_RECT_FROM_RIGHT_EDGE(78), 209-20, "KEYS");
+    print_text(GFX_DIMENSIONS_RECT_FROM_RIGHT_EDGE(78), 209-20, "KEYS");
     print_text(GFX_DIMENSIONS_RECT_FROM_RIGHT_EDGE(78), 209-35, SM64AP_HaveKey1() ? "Y" : "N");
     print_text(GFX_DIMENSIONS_RECT_FROM_RIGHT_EDGE(78)+13, 209-35, SM64AP_HaveKey2() ? "Y" : "N");
     print_text(GFX_DIMENSIONS_RECT_FROM_RIGHT_EDGE(78), 209-35-20, "CAPS");
@@ -2763,7 +2761,6 @@ s16 render_pause_courses_and_castle(void) {
         u8 str_ledge_grab[] = { TEXT_LEDGE_GRAB };
         print_generic_string(x, y - spacing*9, str_ledge_grab);
     }
-    
     return 0;
 }
 
