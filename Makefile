@@ -292,7 +292,7 @@ EXE := $(BUILD_DIR)/$(TARGET).html
 	else
 	ifeq ($(WINDOWS_BUILD),1)
 		EXE := $(BUILD_DIR)/$(TARGET).exe
-
+		CMAKE_WIN_BUILD_FLAG := -DMINGW=1 -DWIN32=1 -G"MSYS Makefiles"
 		else # Linux builds/binary namer
 		ifeq ($(TARGET_RPI),1)
 			EXE := $(BUILD_DIR)/$(TARGET).arm
@@ -455,7 +455,7 @@ DEP_FILES := $(O_FILES:.o=.d) $(ULTRA_O_FILES:.o=.d) $(GODDARD_O_FILES:.o=.d) $(
 SEG_FILES := $(SEGMENT_ELF_FILES) $(ACTOR_ELF_FILES) $(LEVEL_ELF_FILES)
 
 ##################### Compiler Options #######################
-INCLUDE_CFLAGS := -I include -I $(BUILD_DIR) -I $(BUILD_DIR)/include -I src -I .
+INCLUDE_CFLAGS := -I include -I lib/APCpp -I  $(BUILD_DIR) -I $(BUILD_DIR)/include -I src -I .
 ENDIAN_BITWIDTH := $(BUILD_DIR)/endian-and-bitwidth
 
 # Huge deleted N64 section was here
@@ -474,7 +474,7 @@ else
   CXX := emcc
 endif
 
-LD := $(CC)
+LD := $(CXX)
 
 ifeq ($(DISCORDRPC),1)
   LD := $(CXX)
@@ -755,6 +755,7 @@ endif
 
 clean:
 	$(RM) -r $(BUILD_DIR_BASE)
+	$(RM) -r lib/APCpp/build
 
 cleantools:
 	$(MAKE) -s -C tools clean
@@ -1029,9 +1030,19 @@ $(BUILD_DIR)/%.o: %.s
 	$(AS) $(ASFLAGS) -MD $(BUILD_DIR)/$*.d -o $@ $<
 
 
+APCPP_LIB:=lib/APCpp/build/libAPCpp
+ifeq ($(WINDOWS_BUILD),1)
+  APCPP_LIB:=$(APCPP_LIB).dll
+else
+  APCPP_LIB:=$(APCPP_LIB).so
+endif
 
-$(EXE): $(O_FILES) $(MIO0_FILES:.mio0=.o) $(SOUND_OBJ_FILES) $(ULTRA_O_FILES) $(GODDARD_O_FILES) $(if $(RPC_LIBS),$(BUILD_DIR)/$(RPC_LIBS),)
-	$(LD) -L $(BUILD_DIR) -o $@ $(O_FILES) $(SOUND_OBJ_FILES) $(ULTRA_O_FILES) $(GODDARD_O_FILES) $(LDFLAGS)
+$(APCPP_LIB): lib/APCpp/Archipelago.cpp lib/APCpp/Archipelago.h
+	cd lib/APCpp && mkdir -p build && cd build && CXX=$(CXX) cmake .. $(CMAKE_WIN_BUILD_FLAG) -DMBEDTLS_FATAL_WARNINGS=OFF -DCMAKE_C_FLAGS="-fzero-init-padding-bits=unions" && CXX=$(CXX) cmake --build .
+
+$(EXE): $(O_FILES) $(MIO0_FILES:.mio0=.o) $(SOUND_OBJ_FILES) $(ULTRA_O_FILES) $(GODDARD_O_FILES) $(if $(RPC_LIBS),$(BUILD_DIR)/$(RPC_LIBS),) $(APCPP_LIB)
+	$(LD) -static-libgcc -static-libstdc++ -L $(BUILD_DIR) -o $@ $(O_FILES) $(SOUND_OBJ_FILES) $(ULTRA_O_FILES) $(GODDARD_O_FILES) $(LDFLAGS) $(APCPP_LIB) -Wl,-rpath,. 
+	cp $(APCPP_LIB) $(BUILD_DIR)
 
 .PHONY: all clean distclean default diff test load libultra res
 .PRECIOUS: $(BUILD_DIR)/bin/%.elf $(SOUND_BIN_DIR)/%.ctl $(SOUND_BIN_DIR)/%.tbl $(SOUND_SAMPLE_TABLES) $(SOUND_BIN_DIR)/%.s $(BUILD_DIR)/%
