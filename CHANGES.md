@@ -138,6 +138,7 @@ A full list of changes made from sm64ex:
 # Archipelago-Specific Changes
 
 - Secret star count reverted to work like in vanilla
+- Metal Mario is now immune to Deathlink (mostly just for fun)
 
 # To-Do
 
