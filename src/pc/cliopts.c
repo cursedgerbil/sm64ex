@@ -84,6 +84,10 @@ void parse_cli_opts(int argc, char* argv[]) {
         else if (strcmp(argv[i], "--help") == 0) {
             print_help();
             game_exit();
+        } else {
+            SM64AP_InitSP(argv[idx_file]);
         }
+    } else {
+        SM64AP_InitMW(idx_ip == 0 ? "" : argv[idx_ip], argv[idx_name], idx_passwd == 0 ? "" : argv[idx_passwd]);
     }
 }
