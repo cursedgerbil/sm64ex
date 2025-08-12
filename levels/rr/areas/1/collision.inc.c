@@ -2657,7 +2657,7 @@ const Collision rr_seg7_collision_level[] = {
     COL_TRI(1096, 6, 1107),
     COL_TRI(6, 8, 82),
     COL_TRI(6, 82, 1107),
-    COL_TRI_INIT(SURFACE_HORIZONTAL_WIND, 34),
+    COL_TRI_INIT(SURFACE_DEFAULT, 34),
     COL_TRI_SPECIAL(10, 11, 12, 0x100),
     COL_TRI_SPECIAL(10, 12, 13, 0x100),
     COL_TRI_SPECIAL(14, 15, 16, 0x140),
