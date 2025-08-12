@@ -80,9 +80,16 @@ void parse_cli_opts(int argc, char* argv[]) {
         else if (strcmp(argv[i], "--sm64ap_file") == 0 && (i + 1) < argc) idx_file = ++i;
 
 
-        // Print help
+       // Print help
         else if (strcmp(argv[i], "--help") == 0) {
             print_help();
+            game_exit();
+        }
+    }
+    if (idx_name == 0) {
+        if (idx_file == 0) {
+            printf("SM64AP: You need to at least specify Name (For MultiWorld) or Seed Filename (For Singleplayer). Exiting.\n");
+            fflush(stdout);
             game_exit();
         } else {
             SM64AP_InitSP(argv[idx_file]);
