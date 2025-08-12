@@ -8,7 +8,6 @@
 #include "audio/data.h"
 #include "audio/external.h"
 #include "behavior_data.h"
-#include "camera.c"
 #include "camera.h"
 #include "dialog_ids.h"
 #include "engine/behavior_script.h"
@@ -636,7 +635,8 @@ void general_star_dance_handler(struct MarioState *m, s32 isInWater) {
                             set_mario_action(m, isInWater ? ACT_WATER_IDLE : ACT_IDLE, 0);
                             set_fov_function(CAM_FOV_DEFAULT);
                             if (isInWater) {
-                                cutscene_exit_painting_end(m->area->camera);
+                                m->area->camera->mode = CAMERA_MODE_NEWCAM;
+                                m->area->camera->cutscene = 0;
                             }
                         }
                     }
