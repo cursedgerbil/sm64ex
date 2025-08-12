@@ -947,6 +947,7 @@ void update_hud_values(void) {
             } else {
               SM64AP_DeathLinkClear();
         }
+        }
 
         if (gMarioState->hurtCounter > 0) {
             gHudDisplay.flags |= HUD_DISPLAY_FLAG_EMPHASIZE_POWER;
