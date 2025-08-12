@@ -944,7 +944,8 @@ void update_hud_values(void) {
         if (SM64AP_DeathLinkPending()) {
             if (!(gMarioState->flags & MARIO_METAL_CAP)) {
                 gMarioState->health = 0xFF;
-            }
+            } else {
+              SM64AP_DeathLinkClear();
         }
 
         if (gMarioState->hurtCounter > 0) {
