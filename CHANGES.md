@@ -143,4 +143,9 @@ A full list of changes made from sm64ex:
 
 # To-Do
 
+- Fix Lethal Lava Land coins
+- Fix Dire Dire Docks coin
+- Investigate water camera bug
+- Fix Metal Deathlink
+
 - Other improvements
