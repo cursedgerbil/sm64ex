@@ -145,6 +145,7 @@ A full list of changes made from sm64ex:
 
 - Fix Lethal Lava Land coins
 - Fix Dire Dire Docks coin
+- Fix Rainbow Ride floor coins
 - Investigate water camera bug
 - Fix Metal Deathlink
 
