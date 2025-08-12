@@ -1,0 +1,259 @@
+diff --git a/enhancements/papermario-crash.patch b/enhancements/papermario-crash.patch
+new file mode 100644
+index 0000000..76cb6a4
+--- /dev/null
++++ b/enhancements/papermario-crash.patch
+@@ -0,0 +1,47 @@
++diff --git a/sm64.ld b/sm64.ld
++index 250de7a..943e74c 100755
++--- a/sm64.ld
+++++ b/sm64.ld
++@@ -165,6 +165,8 @@ SECTIONS
++       BUILD_DIR/src/audio/external.o(.text);
++       BUILD_DIR/src/audio/port_eu.o(.text);
++ 
+++BUILD_DIR/libultra.a:__osGetCurrFaultedThread.o(.text);
+++
++ #if defined(VERSION_EU) || defined(VERSION_SH)
++       BUILD_DIR/libultra.a:string.o(.text);
++       BUILD_DIR/libultra.a:_Printf.o(.text);
++diff --git a/src/game/crash_screen.c b/src/game/crash_screen.c
++index 64a0f81..ac883cf 100644
++--- a/src/game/crash_screen.c
+++++ b/src/game/crash_screen.c
++@@ -4,7 +4,7 @@
++ 
++ #include "sm64.h"
++ 
++-#if defined(TARGET_N64) && (defined(VERSION_EU) || defined(VERSION_SH))
+++#if defined(TARGET_N64) // && (defined(VERSION_EU) || defined(VERSION_SH))
++ 
++ #include "lib/src/printf.h"
++ 
++diff --git a/src/game/main.c b/src/game/main.c
++index 3d6de1f..04d4a0b 100644
++--- a/src/game/main.c
+++++ b/src/game/main.c
++@@ -415,6 +415,8 @@ void turn_off_audio(void) {
++     }
++ }
++ 
+++extern void crash_screen_init(void);
+++
++ /**
++  * Initialize hardware, start main thread, then idle.
++  */
++@@ -439,6 +441,7 @@ void thread1_idle(UNUSED void *arg) {
++     osViSetSpecialFeatures(OS_VI_DITHER_FILTER_ON);
++     osViSetSpecialFeatures(OS_VI_GAMMA_OFF);
++     osCreatePiManager(OS_PRIORITY_PIMGR, &gPIMesgQueue, gPIMesgBuf, ARRAY_COUNT(gPIMesgBuf));
+++   	crash_screen_init();
++     create_thread(&gMainThread, 3, thread3_main, NULL, gThread3Stack + 0x2000, 100);
++     if (D_8032C650 == 0) {
++         osStartThread(&gMainThread);
+diff --git a/papermario-crash.patch b/papermario-crash.patch
+new file mode 100644
+index 0000000..d4cf99f
+--- /dev/null
++++ b/papermario-crash.patch
+@@ -0,0 +1,153 @@
++diff --git a/enhancements/papermario-crash.patch b/enhancements/papermario-crash.patch
++new file mode 100644
++index 0000000..76cb6a4
++--- /dev/null
+++++ b/enhancements/papermario-crash.patch
++@@ -0,0 +1,47 @@
+++diff --git a/sm64.ld b/sm64.ld
+++index 250de7a..943e74c 100755
+++--- a/sm64.ld
++++++ b/sm64.ld
+++@@ -165,6 +165,8 @@ SECTIONS
+++       BUILD_DIR/src/audio/external.o(.text);
+++       BUILD_DIR/src/audio/port_eu.o(.text);
+++ 
++++BUILD_DIR/libultra.a:__osGetCurrFaultedThread.o(.text);
++++
+++ #if defined(VERSION_EU) || defined(VERSION_SH)
+++       BUILD_DIR/libultra.a:string.o(.text);
+++       BUILD_DIR/libultra.a:_Printf.o(.text);
+++diff --git a/src/game/crash_screen.c b/src/game/crash_screen.c
+++index 64a0f81..ac883cf 100644
+++--- a/src/game/crash_screen.c
++++++ b/src/game/crash_screen.c
+++@@ -4,7 +4,7 @@
+++ 
+++ #include "sm64.h"
+++ 
+++-#if defined(TARGET_N64) && (defined(VERSION_EU) || defined(VERSION_SH))
++++#if defined(TARGET_N64) // && (defined(VERSION_EU) || defined(VERSION_SH))
+++ 
+++ #include "lib/src/printf.h"
+++ 
+++diff --git a/src/game/main.c b/src/game/main.c
+++index 3d6de1f..04d4a0b 100644
+++--- a/src/game/main.c
++++++ b/src/game/main.c
+++@@ -415,6 +415,8 @@ void turn_off_audio(void) {
+++     }
+++ }
+++ 
++++extern void crash_screen_init(void);
++++
+++ /**
+++  * Initialize hardware, start main thread, then idle.
+++  */
+++@@ -439,6 +441,7 @@ void thread1_idle(UNUSED void *arg) {
+++     osViSetSpecialFeatures(OS_VI_DITHER_FILTER_ON);
+++     osViSetSpecialFeatures(OS_VI_GAMMA_OFF);
+++     osCreatePiManager(OS_PRIORITY_PIMGR, &gPIMesgQueue, gPIMesgBuf, ARRAY_COUNT(gPIMesgBuf));
++++   	crash_screen_init();
+++     create_thread(&gMainThread, 3, thread3_main, NULL, gThread3Stack + 0x2000, 100);
+++     if (D_8032C650 == 0) {
+++         osStartThread(&gMainThread);
++diff --git a/papermario-crash.patch b/papermario-crash.patch
++new file mode 100644
++index 0000000..76cb6a4
++--- /dev/null
+++++ b/papermario-crash.patch
++@@ -0,0 +1,47 @@
+++diff --git a/sm64.ld b/sm64.ld
+++index 250de7a..943e74c 100755
+++--- a/sm64.ld
++++++ b/sm64.ld
+++@@ -165,6 +165,8 @@ SECTIONS
+++       BUILD_DIR/src/audio/external.o(.text);
+++       BUILD_DIR/src/audio/port_eu.o(.text);
+++ 
++++BUILD_DIR/libultra.a:__osGetCurrFaultedThread.o(.text);
++++
+++ #if defined(VERSION_EU) || defined(VERSION_SH)
+++       BUILD_DIR/libultra.a:string.o(.text);
+++       BUILD_DIR/libultra.a:_Printf.o(.text);
+++diff --git a/src/game/crash_screen.c b/src/game/crash_screen.c
+++index 64a0f81..ac883cf 100644
+++--- a/src/game/crash_screen.c
++++++ b/src/game/crash_screen.c
+++@@ -4,7 +4,7 @@
+++ 
+++ #include "sm64.h"
+++ 
+++-#if defined(TARGET_N64) && (defined(VERSION_EU) || defined(VERSION_SH))
++++#if defined(TARGET_N64) // && (defined(VERSION_EU) || defined(VERSION_SH))
+++ 
+++ #include "lib/src/printf.h"
+++ 
+++diff --git a/src/game/main.c b/src/game/main.c
+++index 3d6de1f..04d4a0b 100644
+++--- a/src/game/main.c
++++++ b/src/game/main.c
+++@@ -415,6 +415,8 @@ void turn_off_audio(void) {
+++     }
+++ }
+++ 
++++extern void crash_screen_init(void);
++++
+++ /**
+++  * Initialize hardware, start main thread, then idle.
+++  */
+++@@ -439,6 +441,7 @@ void thread1_idle(UNUSED void *arg) {
+++     osViSetSpecialFeatures(OS_VI_DITHER_FILTER_ON);
+++     osViSetSpecialFeatures(OS_VI_GAMMA_OFF);
+++     osCreatePiManager(OS_PRIORITY_PIMGR, &gPIMesgQueue, gPIMesgBuf, ARRAY_COUNT(gPIMesgBuf));
++++   	crash_screen_init();
+++     create_thread(&gMainThread, 3, thread3_main, NULL, gThread3Stack + 0x2000, 100);
+++     if (D_8032C650 == 0) {
+++         osStartThread(&gMainThread);
++diff --git a/sm64.ld b/sm64.ld
++index 250de7a..943e74c 100755
++--- a/sm64.ld
+++++ b/sm64.ld
++@@ -165,6 +165,8 @@ SECTIONS
++       BUILD_DIR/src/audio/external.o(.text);
++       BUILD_DIR/src/audio/port_eu.o(.text);
++ 
+++BUILD_DIR/libultra.a:__osGetCurrFaultedThread.o(.text);
+++
++ #if defined(VERSION_EU) || defined(VERSION_SH)
++       BUILD_DIR/libultra.a:string.o(.text);
++       BUILD_DIR/libultra.a:_Printf.o(.text);
++diff --git a/src/game/crash_screen.c b/src/game/crash_screen.c
++index 64a0f81..ac883cf 100644
++--- a/src/game/crash_screen.c
+++++ b/src/game/crash_screen.c
++@@ -4,7 +4,7 @@
++ 
++ #include "sm64.h"
++ 
++-#if defined(TARGET_N64) && (defined(VERSION_EU) || defined(VERSION_SH))
+++#if defined(TARGET_N64) // && (defined(VERSION_EU) || defined(VERSION_SH))
++ 
++ #include "lib/src/printf.h"
++ 
++diff --git a/src/game/main.c b/src/game/main.c
++index 3d6de1f..04d4a0b 100644
++--- a/src/game/main.c
+++++ b/src/game/main.c
++@@ -415,6 +415,8 @@ void turn_off_audio(void) {
++     }
++ }
++ 
+++extern void crash_screen_init(void);
+++
++ /**
++  * Initialize hardware, start main thread, then idle.
++  */
++@@ -439,6 +441,7 @@ void thread1_idle(UNUSED void *arg) {
++     osViSetSpecialFeatures(OS_VI_DITHER_FILTER_ON);
++     osViSetSpecialFeatures(OS_VI_GAMMA_OFF);
++     osCreatePiManager(OS_PRIORITY_PIMGR, &gPIMesgQueue, gPIMesgBuf, ARRAY_COUNT(gPIMesgBuf));
+++   	crash_screen_init();
++     create_thread(&gMainThread, 3, thread3_main, NULL, gThread3Stack + 0x2000, 100);
++     if (D_8032C650 == 0) {
++         osStartThread(&gMainThread);
+diff --git a/sm64.ld b/sm64.ld
+index 250de7a..943e74c 100755
+--- a/sm64.ld
++++ b/sm64.ld
+@@ -165,6 +165,8 @@ SECTIONS
+       BUILD_DIR/src/audio/external.o(.text);
+       BUILD_DIR/src/audio/port_eu.o(.text);
+ 
++BUILD_DIR/libultra.a:__osGetCurrFaultedThread.o(.text);
++
+ #if defined(VERSION_EU) || defined(VERSION_SH)
+       BUILD_DIR/libultra.a:string.o(.text);
+       BUILD_DIR/libultra.a:_Printf.o(.text);
+diff --git a/src/game/crash_screen.c b/src/game/crash_screen.c
+index 64a0f81..ac883cf 100644
+--- a/src/game/crash_screen.c
++++ b/src/game/crash_screen.c
+@@ -4,7 +4,7 @@
+ 
+ #include "sm64.h"
+ 
+-#if defined(TARGET_N64) && (defined(VERSION_EU) || defined(VERSION_SH))
++#if defined(TARGET_N64) // && (defined(VERSION_EU) || defined(VERSION_SH))
+ 
+ #include "lib/src/printf.h"
+ 
+diff --git a/src/game/main.c b/src/game/main.c
+index 3d6de1f..04d4a0b 100644
+--- a/src/game/main.c
++++ b/src/game/main.c
+@@ -415,6 +415,8 @@ void turn_off_audio(void) {
+     }
+ }
+ 
++extern void crash_screen_init(void);
++
+ /**
+  * Initialize hardware, start main thread, then idle.
+  */
+@@ -439,6 +441,7 @@ void thread1_idle(UNUSED void *arg) {
+     osViSetSpecialFeatures(OS_VI_DITHER_FILTER_ON);
+     osViSetSpecialFeatures(OS_VI_GAMMA_OFF);
+     osCreatePiManager(OS_PRIORITY_PIMGR, &gPIMesgQueue, gPIMesgBuf, ARRAY_COUNT(gPIMesgBuf));
++   	crash_screen_init();
+     create_thread(&gMainThread, 3, thread3_main, NULL, gThread3Stack + 0x2000, 100);
+     if (D_8032C650 == 0) {
+         osStartThread(&gMainThread);
