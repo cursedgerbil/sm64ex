@@ -144,7 +144,7 @@ const LevelScript level_rr_entry[] = {
         OBJECT(/*model*/ MODEL_EXCLAMATION_BOX, /*pos*/ -6750,  2600,   -50, /*angle*/ 0, 0, 0, /*behParam*/ (0x14040000 + LEVEL_RR*10 + 1), /*beh*/ bhvExclamationBox),
         OBJECT(/*model*/ MODEL_EXCLAMATION_BOX, /*pos*/ -4844, -4240,  6622, /*angle*/ 0, 0, 0, /*behParam*/ (0x14040000 + LEVEL_RR*10 + 2), /*beh*/ bhvExclamationBox),
         OBJECT(/*model*/ MODEL_EXCLAMATION_BOX, /*pos*/ -3428,  6770, -5128, /*angle*/ 0, 0, 0, /*behParam*/ (0x14040000 + LEVEL_RR*10 + 3), /*beh*/ bhvExclamationBox),
-        SET_BACKGROUND_MUSIC(/*settingsPreset*/ 0x0000, /*seq*/ SEQ_LEVEL_SLIDE),
+        SET_BACKGROUND_MUSIC(/*settingsPreset*/ 0x0000, /*seq*/ SEQ_RAINBOW),
         TERRAIN_TYPE(/*terrainType*/ TERRAIN_STONE),
     END_AREA(),
 
