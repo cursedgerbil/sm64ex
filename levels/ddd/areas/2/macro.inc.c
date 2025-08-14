@@ -34,7 +34,7 @@ const MacroObject ddd_seg7_area_2_macro_objs[] = {
     MACRO_OBJECT(/*preset*/ macro_hidden_box,                  /*yaw*/   0, /*pos*/  5740,   110,  4500),
     MACRO_OBJECT(/*preset*/ macro_seaweed_bundle,              /*yaw*/   0, /*pos*/  2999, -4092,  4430),
     MACRO_OBJECT(/*preset*/ macro_coin_ring_horizontal,        /*yaw*/   0, /*pos*/  4876, -4087,  4430),
-    MACRO_OBJECT(/*preset*/ macro_coin_ring_horizontal_flying, /*yaw*/   0, /*pos*/  4900, -4250, -2300),
+    MACRO_OBJECT(/*preset*/ macro_coin_ring_horizontal_flying, /*yaw*/   0, /*pos*/  4900, -3550, -2300),
     MACRO_OBJECT(/*preset*/ macro_coin_ring_horizontal_flying, /*yaw*/   0, /*pos*/  1300, -4420,    80),
     MACRO_OBJECT(/*preset*/ macro_box_ten_coins,               /*yaw*/   0, /*pos*/  1430,   655,  4220),
     MACRO_OBJECT(/*preset*/ macro_coin_ring_vertical,          /*yaw*/  90, /*pos*/  1300, -2520,    80),
